@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>RSS Discovery Engine</title>
+		<style>
+
+			/* Pure CSS Loader Animation*/
+			/* https://demos.mercenie.com/run/w8SNi1Fz/ */
+			.loader {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+			}
+
+			.bubble {
+				animation: expand .75s ease-in-out infinite;
+				border-radius: 20px;
+				display: inline-block;
+				transform-origin: center center;
+				margin: 0 3px;
+				width: 20px;
+				height: 20px;
+			}
+
+			.bubble:nth-child(1) {background: #27ae60;margin-left:-58px;}
+			.bubble:nth-child(2) {animation-delay: 180ms;background: #f1c40f;}
+			.bubble:nth-child(3) {animation-delay: 360ms;background: #e67e22;}
+			.bubble:nth-child(4) {animation-delay: 540ms;background: #2980b9;}
+
+			@keyframes expand {
+				0% {
+					transform: scale(1);
+				}
+				25% {
+					transform: scale(1.55);
+				}
+			}
+
+			/* Layout */
+			body {
+				margin:0;
+				font-family:Verdana, Geneva, Tahoma, sans-serif;
+				color: #3b3b3b;
+				font-size: 16px;
+				line-height: 1.7em;
+			}
+
+			.wrapper {
+				width:480px;
+				margin:16px auto;
+				padding:16px;
+				border-bottom: #ddd solid 2px;
+			}
+			h1, h2, h3, h4, p {
+				margin:0 0 16px 0;
+			}
+			h2, h3, h4 {
+				font-weight: normal;
+			}
+			h2 {
+				font-size: 1.3;
+			}
+			h3 {
+				font-size: 1.2;
+			}
+			h4 {
+				font-size: 1.1;
+			}
+			blockquote {
+				font-style: italic;
+			}
+
+			a {
+				color:#e67e22;
+			}
+			/* Forms */
+			button, 
+			input {
+				display:block;
+				box-sizing: border-box;
+				width: 100%;
+				font-size: 1em;
+				padding:8px;
+				margin: 0 0 12px 0;
+				border-radius: 4px;
+			}
+			button {
+				background: #2980b9;
+				background: #e67e22;
+				color: white;
+				border:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loader" class="loader" style="display: none;">
+			<div class="bubble"></div>
+			<div class="bubble"></div>
+			<div class="bubble"></div>
+			<div class="bubble"></div>
+		</div>
+			<div class="wrapper">
+				<h1>RSS Discovery Engine</h1>
+			<form method="POST">
+				<input placeholder="http..." type="text" name="blog_url" value="{{ blog_url }}" />
+				<button type="submit" onclick="document.getElementById('loader').removeAttribute('style')">Submit</button>
+			</form>
+			</div>
+			<div class="wrapper">
+				{% if results %}
+				<ul>
+					{% for result in results %}
+					<li>
+						<a href="{{ result['link'] }}" target="_blank">
+							{{ result['title'] }}
+						</a>
+						<div>{{ result['subtitle'] }}</div>
+					</li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				No results
+				{% endif %}
+			</div>
+		</div>
+		<div class="wrapper">
+			<h2>The Goal</h2>
+			<p>
+				The RSS Discovery Engine exists to encourage people to use RSS for finding and consuming their news and current events.
+			</p>
+			<p>
+				RSS is the most independent way to be notified of new content from your favorite author and creators. When you follow a feed you no longer have any need for social networking, micro-blogging, or search engine to help you find new content from that site.
+			</p>
+
+			<h2>RSS is Healthier for Society Than Alternatives</h2>
+			<p>
+					Social networking and search engines help us all keep in touch. But when people are dependent on them for news and current events, then society becomes much more susceptible to manipulation.
+			</p>
+			
+			<h2>Find RSS Feeds Using Blogs You Already Trust</h2>
+			<p>The RSS Discovery Engine exists to encourage people to use RSS.</p>
+			
+			<h2>Further Reading</h2>
+			<ul>
+				<li><a href="http://socialpsychonline.com/2015/09/search-engine-manipulation-effect-election/" target="_blank">How Tampering with Search Engines Could Swing an Election</a></li>
+				<li><a target="_blank" href="https://gizmodo.com/rss-is-better-than-twitter-1833624929">RSS is Better than Twitter</a></li>
+			</ul>
+		</div>
+	</body>
+</html>
