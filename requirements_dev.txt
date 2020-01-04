@@ -1,6 +1,7 @@
 aiohttp==3.6.2
 astroid==2.3.3
 async-timeout==3.0.1
+asyncio==3.4.3
 attrs==19.3.0
 backcall==0.1.0
 beautifulsoup4==4.8.2
