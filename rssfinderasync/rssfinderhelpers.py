@@ -51,7 +51,7 @@ def get_urls_from_rss_feed(rss_url):
         anchors = find_anchors(entry)
         for anchor in anchors:
             url = anchor.get("href")
-            if url:
+            if is_valid_url(url):
                 urls.append(url)
 
     return urls
@@ -65,6 +65,9 @@ def find_anchors(entry):
             soup = BeautifulSoup(content.value, "html.parser")
             anchors += soup.find_all('a')
     return anchors
+
+def is_valid_url(url):
+    return url and not url.startswith("#") and not url.startswith("javascript:")
 
 def is_rss_content_type(content_type):
     if content_type.startswith("application/rss") \

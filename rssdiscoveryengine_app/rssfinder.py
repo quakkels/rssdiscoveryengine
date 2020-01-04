@@ -45,7 +45,7 @@ def find_links(url):
 				continue
 
 			if is_ignored(discarded, link):
-				print(f'Ignored (dicarded): {link}')
+				print(f'Ignored (discarded): {link}')
 				continue
 
 			if is_ignored([o.link for o in feeds], link):
