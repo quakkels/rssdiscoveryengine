@@ -1,5 +1,9 @@
 tiaamd-env/
 tiaamd_env/
+rssdiscoveryengine-env/
+rssdiscoveryengine_env/
+rde-env/
+rde_env/
 .vscode/
 
 *.pyc

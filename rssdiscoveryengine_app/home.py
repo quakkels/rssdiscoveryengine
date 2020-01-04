@@ -7,7 +7,7 @@ from flask import (
 	)
 from jinja2 import TemplateNotFound
 from . import rssfinder
-from rssfinderasync import rfa
+from rssfinderasync import rfasync
 
 bp = Blueprint('home', __name__,
 	template_folder='templates')
@@ -21,7 +21,7 @@ def index():
 		if blog_url is not None:
 			# rss_feed_url = rssfinder.find_rss_url(blog_url)
 			# results = rssfinder.find_links(rss_feed_url)
-			results = rfa.initiate_finder(blog_url)
+			results = rfasync.initiate_finder(blog_url)
 			print("finished getting results")
 
 	return render_template('home.html', blog_url = blog_url,
