@@ -1,32 +1,39 @@
 import asyncio
+import aiohttp
 from aiohttp import ClientSession
 import feedparser
 from . import rssfinderhelpers as helpers
 
 async def fetch(blog_url, session):
     rss_url = None
-    async with session.get(blog_url) as response:
-        result = await response.read()
-    
-    rss_url = helpers.find_rss_url_in_html(result)
+    result = None
+    try:
+        async with session.get(blog_url, timeout=4) as response:
+            result = await response.read()
+    except Exception as e:
+        print(f"<Exception>{e}</Exception><blog_url>{blog_url}</blog_url>")
+
+    if result:
+        rss_url = helpers.find_rss_url_in_html(result)
 
     if not rss_url:
         rss_url = helpers.build_possible_rss_url(blog_url)
-    
+
     rss_url = helpers.add_protocol_urlprefix(blog_url, rss_url)
 
-    print(f"LOOKING {rss_url} from {blog_url}")
-    async with session.get(rss_url) as response:
-        if response.status != 200 \
-        or not helpers.is_rss_content_type(response.headers["Content-Type"]):
-            print(f"NOTFOUND: rss found {rss_url}")
-            return
+    try:
+        async with session.get(rss_url) as response:
+            if response.status != 200 \
+            or not helpers.is_rss_content_type(response.headers["Content-Type"]):
+                return
 
-        feed = feedparser.parse(await response.read())
-        if feed.bozo > 0:
-            print(f"BOZO FOUND: {rss_url}")
-        print(f"FOUND: end fetch {blog_url}")
-        return feed.feed
+            feed = feedparser.parse(await response.read())
+            if feed.bozo > 0:
+                print(f"BOZO FOUND: {rss_url}")
+                return
+            return feed.feed
+    except Exception as e:
+        print(f"<Exception>{e}</Exception><blog_url>{blog_url}</blog_url>")
 
 async def fetch_bound_async(sem, url, session):
     async with sem:
@@ -34,10 +41,10 @@ async def fetch_bound_async(sem, url, session):
         return result
 
 async def run(urls):
-    print("start run()")
-    sem = asyncio.Semaphore(500)
+    sem = asyncio.Semaphore(1000)
     tasks = []
-    async with ClientSession() as session:
+    timeout = aiohttp.ClientTimeout(total=10)
+    async with ClientSession(timeout=timeout) as session:
         for url in urls:
             task = asyncio.ensure_future(
                 fetch_bound_async(sem, url, session)
@@ -45,7 +52,6 @@ async def run(urls):
             tasks.append(task)
 
         responses = await asyncio.gather(*tasks)
-        print("end run()")
         return responses
 
 def initiate_finder(blog_url):
