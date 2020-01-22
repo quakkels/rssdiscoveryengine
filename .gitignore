@@ -4,6 +4,7 @@ rssdiscoveryengine-env/
 rssdiscoveryengine_env/
 rde-env/
 rde_env/
+setuptest_env/
 .vscode/
 
 *.pyc
