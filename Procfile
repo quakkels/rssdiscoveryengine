@@ -1,0 +1,1 @@
+web: gunicorn "rssdiscoveryengine_app:create_app()"
