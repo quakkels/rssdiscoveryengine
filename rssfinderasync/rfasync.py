@@ -55,6 +55,7 @@ async def run(urls):
         return responses
 
 def initiate_finder(blog_url):
+    blog_url = blog_url.strip()
     html = helpers.get_response_content(blog_url)
     if not html:
         return
