@@ -30,6 +30,6 @@ def index():
 		results = results)
 
 def is_blog_url_valid(blog_url):
-	has_http = blog_url.startswith("http")
+	has_http = blog_url.lower().startswith("http")
 	has_slashes = "://" in blog_url
 	return has_http and has_slashes
