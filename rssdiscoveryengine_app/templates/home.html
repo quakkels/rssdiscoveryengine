@@ -115,21 +115,21 @@
 		</div>
 			<div class="wrapper">
 				<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
-			<form method="POST">
+			<form method="POST" onsubmit="document.getElementById('loader').removeAttribute('style')">
 				<input 
 					placeholder="http..." 
 					type="url" 
 					name="blog_url" 
 					value="{{ blog_url }}" 
 					required />
-				<button type="submit" onsubmit="document.getElementById('loader').removeAttribute('style')">Submit</button>
+				<button type="submit">🕷️ Submit</button>
 			</form>
 			</div>
 			<div class="wrapper">
 				{% if results %}
 				<ul>
 					{% for result in results %}
-					<li>
+					<li>🕷️
 						<a href="{{ result['link'] }}" target="_blank">
 							{{ result['title'] }}
 						</a>
