@@ -6,8 +6,9 @@ def get_response_content(url):
     response = None
     try:
         response = requests.get(url)
-    except requests.exceptions.SSLError:
+    except:
         return
+
     if not response.ok:
         return
 
