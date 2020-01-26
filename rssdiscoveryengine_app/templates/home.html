@@ -74,8 +74,9 @@
 				font-style: italic;
 			}
 
-			a {
+			a, a:active, a:focus {
 				color:#e67e22;
+				outline:0;
 			}
 			/* Forms */
 			button, 
@@ -88,14 +89,34 @@
 				margin: 0 0 12px 0;
 				border-radius: 4px;
 			}
-			button {
-				background: #2980b9;
+			button, :root button:active, :root button:focus {
+				outline:0;
 				background: #e67e22;
 				color: white;
 				border:none;
+				cursor: pointer;
 			}
 
-			/* responsive files */
+			/* Results List */
+			a.button {
+				display: inline-block;
+				box-sizing: border-box;
+				font-size: 1em;
+				text-decoration: none;
+				padding: 0px 3px;
+				margin: 4px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				background: #d9d9d9;
+			}
+
+			a.url {
+				font-style: italic;
+				text-decoration: none;
+				color: #3b3b3b;
+			}
+
+			/* Responsive Styles */
 
 			@media only screen and (max-width: 480px) {
 				.wrapper {
@@ -113,54 +134,41 @@
 			<div class="bubble"></div>
 			<div class="bubble"></div>
 		</div>
-			<div class="wrapper">
-				<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
-			<form method="POST" onsubmit="document.getElementById('loader').removeAttribute('style')">
+		<div class="wrapper">
+			<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
+			<form method="GET" onsubmit="document.getElementById('loader').removeAttribute('style')">
 				<input 
-					placeholder="http..." 
-					type="url" 
-					name="blog_url" 
-					value="{{ blog_url }}" 
-					required />
+				placeholder="http..." 
+				type="url" 
+				name="blog_url" 
+				value="{{ blog_url }}" 
+				required />
 				<button type="submit">🕷️ Submit</button>
 			</form>
-			</div>
-			<div class="wrapper">
-				{% if results %}
-				<ul>
-					{% for result in results %}
-					<li>🕷️
-						<a href="{{ result['link'] }}" target="_blank">
-							{{ result['title'] }}
-						</a>
-						<div>{{ result['subtitle'] }}</div>
-					</li>
-					{% endfor %}
-				</ul>
-				{% else %}
-				No results
-				{% endif %}
-			</div>
 		</div>
 		<div class="wrapper">
-			<h2>The Goal</h2>
-			<p>
-				The RSS Discovery Engine exists to encourage people to use RSS for finding and consuming their news and current events.
-			</p>
-			<p>
-				RSS is the most independent way to be notified of new content from your favorite authors and creators. When you follow a feed you no longer have any need for social networking, micro-blogging, or search engines to help you find new content from that site.
-			</p>
-
-			<h2>RSS is Healthier for Society Than Alternatives</h2>
-			<p>
-				Social networking and search engines help us all keep in touch. But when people are dependent on them for news and current events, then society becomes much more susceptible to manipulation.
-			</p>
-			
-			<h2>Further Reading</h2>
+			{% if results %}
 			<ul>
-				<li><a href="http://socialpsychonline.com/2015/09/search-engine-manipulation-effect-election/" target="_blank">How Tampering with Search Engines Could Swing an Election</a></li>
-				<li><a target="_blank" href="https://gizmodo.com/rss-is-better-than-twitter-1833624929">RSS is Better than Twitter</a></li>
+				{% for result in results %}
+				<li>
+					<a href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
+						{{ result['title'] }}
+					</a>
+					<a class="button" href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
+						🔗
+					</a>
+					<a class="button" href="/?blog_url={{ result['link'] }}">
+						🕷️
+					</a>
+					<div>{{ result['subtitle'] }}</div>
+					<a class="url" href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">{{ result['link'] }}</a>
+				</li>
+				{% endfor %}
 			</ul>
+			{% else %}
+			No results
+			{% endif %}
 		</div>
-	</body>
+	</div>
+</body>
 </html>
