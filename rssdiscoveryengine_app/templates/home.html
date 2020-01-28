@@ -97,6 +97,23 @@
 				cursor: pointer;
 			}
 
+			#search{
+				display:flex;
+				flex-direction: row;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+			#search input{
+				border:none;
+				border-radius: 0;
+				margin:0;
+			}
+			#search button{
+				border-radius: 0;
+				margin:0;
+				width: 120px
+			}
+
 			/* Results List */
 			a.button {
 				display: inline-block;
@@ -138,16 +155,19 @@
 		<div class="wrapper">
 			<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
 			<form method="GET" onsubmit="document.getElementById('loader').removeAttribute('style')">
-				<input 
-				placeholder="http..." 
-				type="url" 
-				name="blog_url" 
-				value="{{ blog_url }}" 
-				required />
-				<button type="submit">🕷️ Submit</button>
+				<div id="search">
+					<input 
+						placeholder="http..." 
+						type="url" 
+						name="blog_url" 
+						value="{{ blog_url }}" 
+						required 
+						autofocus/>
+					<button type="submit">🕷️ Submit</button>
+				</div>
 			</form>
 		</div>
-		<div class="wrapper">
+		<div class="wrapper">			
 			{% if results %}
 			<ul>
 				{% for result in results %}
@@ -166,6 +186,8 @@
 				</li>
 				{% endfor %}
 			</ul>
+			{% elif blog_url == ''%}
+			Enter a blog's URL to spider their RSS feed and find links to other blogs.
 			{% else %}
 			No results
 			{% endif %}
