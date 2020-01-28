@@ -52,7 +52,7 @@
 			.wrapper {
 				width:480px;
 				margin:16px auto;
-				padding:16px;
+				padding:0px 16px 16px 16px;
 				border-bottom: #ddd solid 2px;
 			}
 			h1, h2, h3, h4, p {
@@ -115,15 +115,36 @@
 			}
 
 			/* Results List */
-			a.button {
-				display: inline-block;
-				box-sizing: border-box;
+
+			#searchResults {
+				padding:0;
+				font-size: 0.9em;
+				line-height: 1.2em;
+			}
+
+			#searchResults li {
+				list-style: none;
+				padding: 8px;
+				margin: 0 0 8px 0;
+				border: 1px dashed #ddd;
+			}
+
+			.resultHeader {
+				display: flex;
+			}
+
+			.resultHeader a {
+				display: block;
 				font-size: 1em;
 				text-decoration: none;
-				padding: 0px 3px;
-				margin: 4px;
+				padding:8px 0;
+				width: 100%
+			}
+
+			.resultHeader a.button {
+				width:14px;
+				padding:8px;
 				border: 1px solid #ccc;
-				border-radius: 4px;
 				background: #d9d9d9;
 			}
 
@@ -139,7 +160,6 @@
 			@media only screen and (max-width: 480px) {
 				.wrapper {
 					width: auto;
-					padding:0 16px;
 				}
 			}
 
@@ -163,24 +183,26 @@
 						value="{{ blog_url }}" 
 						required 
 						autofocus/>
-					<button type="submit">🕷️ Submit</button>
+					<button type="submit">🕷️ Spider</button>
 				</div>
 			</form>
 		</div>
-		<div class="wrapper">			
+		<div class="wrapper">
 			{% if results %}
-			<ul>
+			<ul id="searchResults">
 				{% for result in results %}
 				<li>
-					<a href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
-						{{ result['title'] }}
-					</a>
-					<a class="button" href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
-						🔗
-					</a>
-					<a class="button" href="/?blog_url={{ result['link'] }}">
-						🕷️
-					</a>
+					<div class="resultHeader">
+						<a href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
+							{{ result['title'] }}
+						</a>
+						<a class="button" href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">
+							🔗
+						</a>
+						<a class="button" href="/?blog_url={{ result['link'] }}">
+							🕷️
+						</a>
+					</div>
 					<div>{{ result['subtitle'] }}</div>
 					<a class="url" href="{{ result['link'] }}" target="_blank" rel="noopener noreferrer">{{ result['link'] }}</a>
 				</li>
