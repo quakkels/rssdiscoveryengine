@@ -71,9 +71,7 @@ def find_anchors(entry):
     return anchors
 
 def is_valid_url(url):
-    return url and not url.startswith("#") \
-        and not url.startswith("javascript:") \
-        and not url.startswith("mailto:")
+    return url and url.startswith("http")
 
 def is_rss_content_type(content_type):
     if content_type.startswith("application/rss") \
