@@ -67,6 +67,8 @@ def initiate_finder(blog_url):
     rss_url = helpers.add_protocol_urlprefix(blog_url, rss_url)
 
     urls = helpers.get_urls_from_rss_feed(rss_url)
+    if not urls:
+        return
 
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
