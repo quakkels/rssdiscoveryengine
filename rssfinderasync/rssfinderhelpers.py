@@ -89,4 +89,4 @@ def find_unique_results(results):
         if not result.link in unique:
             unique[result.link] = result
 
-    return unique
+    return unique.values()
