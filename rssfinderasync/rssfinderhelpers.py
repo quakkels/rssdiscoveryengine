@@ -29,6 +29,9 @@ def find_rss_url_in_html(html):
     return rss_url
 
 def build_possible_rss_url(url):
+    if url.startswith("mailto:"):
+        return
+
     url_split = url.split('/')
     possible_url = url_split[0]+url_split[1]+'//'+url_split[2]+'/feed'
     return possible_url
@@ -68,7 +71,9 @@ def find_anchors(entry):
     return anchors
 
 def is_valid_url(url):
-    return url and not url.startswith("#") and not url.startswith("javascript:")
+    return url and not url.startswith("#") \
+        and not url.startswith("javascript:") \
+        and not url.startswith("mailto:")
 
 def is_rss_content_type(content_type):
     if content_type.startswith("application/rss") \
