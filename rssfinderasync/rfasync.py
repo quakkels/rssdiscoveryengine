@@ -75,5 +75,5 @@ def initiate_finder(blog_url):
     future = asyncio.ensure_future(run(urls))
     result = loop.run_until_complete(future)
 
-    result = [x for x in result if x is not None]
+    result = helpers.find_unique_results(result)
     return result

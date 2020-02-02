@@ -81,3 +81,12 @@ def is_rss_content_type(content_type):
     or content_type.startswith("application/xml"):
         return True
     return False
+
+def find_unique_results(results):
+    results = [x for x in results if x is not None]
+    unique = {}
+    for result in results:
+        if not result.link in unique:
+            unique[result.link] = result
+
+    return unique
