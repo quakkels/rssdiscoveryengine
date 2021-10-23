@@ -155,6 +155,11 @@
 				font-size: 0.8em;
 			}
 
+			a.nolink, a.nolink:hover, a.nolink:active {
+				color: #3b3b3b;
+				text-decoration: none;
+			}
+
 			/* Responsive Styles */
 
 			@media only screen and (max-width: 480px) {
@@ -173,7 +178,9 @@
 			<div class="bubble"></div>
 		</div>
 		<div class="wrapper">
-			<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
+			<a href="/" class="nolink">
+				<h1>RSS Discovery Engine  <em>pre-alpha</em></h1>
+			</a>
 			<form method="GET" onsubmit="document.getElementById('loader').removeAttribute('style')">
 				<div id="search">
 					<input 
