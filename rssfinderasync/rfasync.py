@@ -27,7 +27,7 @@ async def fetch(blog_url, session):
     try:
         async with session.get(rss_url) as response:
             if response.status != 200 \
-            or not helpers.is_rss_content_type(response.headers["Content-Type"]):
+            or not helpers.is_feed_content_type(response.headers["Content-Type"]):
                 return
 
             feed = feedparser.parse(await response.read())
