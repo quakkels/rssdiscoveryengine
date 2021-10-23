@@ -6,6 +6,7 @@ rde-env/
 rde_env/
 setuptest_env/
 .vscode/
+.venv/
 
 *.pyc
 __pycache__/
