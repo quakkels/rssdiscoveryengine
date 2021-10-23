@@ -31,7 +31,7 @@ async def fetch(blog_url, session):
             if feed.bozo > 0:
                 print(f"BOZO FOUND: {rss_url}")
                 return
-            return feed.feed
+            return helpers.unescape_feed(feed.feed)
     except Exception as e:
         print(f"<Exception>{e}</Exception><blog_url>{blog_url}</blog_url>")
 

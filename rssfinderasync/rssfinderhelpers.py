@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import feedparser
+import html
 
 def get_response_content(url):
     response = None
@@ -79,6 +80,17 @@ def is_rss_content_type(content_type):
     or content_type.startswith("application/xml"):
         return True
     return False
+
+# mutates feedparser object
+def unescape_feed(feed):
+    if "title" in feed:
+        feed["title"] = html.unescape(feed["title"])
+    if "title_detail" in feed:
+        title_detail = feed["title_detail"]
+        if "value" in title_detail:
+            title_detail["value"] = html.unescape(title_detail["value"])
+        feed["title_detail"] = title_detail
+    return feed
 
 def find_unique_results(results):
     results = [x for x in results if x is not None]
