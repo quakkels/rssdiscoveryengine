@@ -1,6 +1,9 @@
+from urllib.parse import urlparse
+
+import feedparser
 import requests
 from bs4 import BeautifulSoup
-import feedparser
+
 
 def get_response_content(url):
     response = None
@@ -28,13 +31,15 @@ def find_rss_url_in_html(html):
     rss_url = link_tag.get("href")
     return rss_url
 
-def build_possible_rss_url(url):
-    if url.startswith("mailto:"):
-        return
 
-    url_split = url.split('/')
-    possible_url = url_split[0]+url_split[1]+'//'+url_split[2]+'/feed'
-    return possible_url
+def build_possible_rss_url(url):
+    parsed = urlparse(url)
+    if not parsed.scheme in ['http', 'https']:
+        return None
+    # Remove query string & fragment noise if present
+    parsed = parsed._replace(path='/feed', query='', fragment='')
+    return parsed.geturl()
+
 
 def add_protocol_urlprefix(blog_url, rss_url):
     if rss_url.startswith('//'):
