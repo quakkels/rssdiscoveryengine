@@ -32,6 +32,7 @@ prompt-toolkit==3.0.2
 ptyprocess==0.6.0
 Pygments==2.5.2
 pylint==2.4.4
+pytest==6.2.5
 requests==2.22.0
 rope==0.14.0
 six==1.13.0
