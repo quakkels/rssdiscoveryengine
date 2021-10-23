@@ -1,8 +1,11 @@
 import asyncio
+
 import aiohttp
-from aiohttp import ClientSession
 import feedparser
-from . import rssfinderhelpers as helpers
+
+from rssdiscoveryengine_app.headers import HTTP_HEADERS
+from rssfinderasync import rssfinderhelpers as helpers
+
 
 async def fetch(blog_url, session):
     rss_url = None
@@ -44,7 +47,7 @@ async def run(urls):
     sem = asyncio.Semaphore(1000)
     tasks = []
     timeout = aiohttp.ClientTimeout(total=10)
-    async with ClientSession(timeout=timeout) as session:
+    async with aiohttp.ClientSession(timeout=timeout, headers=HTTP_HEADERS) as session:
         for url in urls:
             task = asyncio.ensure_future(
                 fetch_bound_async(sem, url, session)

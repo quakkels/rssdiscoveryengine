@@ -5,10 +5,13 @@ import requests
 import html
 from bs4 import BeautifulSoup
 
+from rssdiscoveryengine_app.headers import HTTP_HEADERS
+
+
 def get_response_content(url):
     response = None
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=HTTP_HEADERS)
     except:
         return
 
@@ -51,7 +54,7 @@ def add_protocol_urlprefix(blog_url, rss_url):
     return rss_url
 
 def get_urls_from_rss_feed(rss_url):
-    feed = feedparser.parse(rss_url)
+    feed = feedparser.parse(rss_url, request_headers=HTTP_HEADERS)
     if feed.bozo > 0:
         return
 
