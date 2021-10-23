@@ -89,7 +89,6 @@ def unescape_feed(feed):
         title_detail = feed["title_detail"]
         if "value" in title_detail:
             title_detail["value"] = html.unescape(title_detail["value"])
-        feed["title_detail"] = title_detail
     return feed
 
 def find_unique_results(results):
