@@ -4,6 +4,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
+from rssdiscoveryengine_app.headers import HTTP_HEADERS
 from rssfinderasync.rssfinderhelpers import build_possible_rss_url
 
 # Autoreload imported scripts without restarting the repl:
@@ -16,16 +17,12 @@ ignore = [
 	'https://t.co',
 	'https://www.instagram.com'
 ]
-agent = 'RSS Discovery Engine 0.1'
-request_headers = {
-	'User-Agent': agent
-}
 
 
 def find_links(url):
 	feeds = []
 	discarded = []
-	result = feedparser.parse(url)
+	result = feedparser.parse(url, request_headers=HTTP_HEADERS)
 
 	if result.bozo > 0:
 		# there were errors parsing the feed
@@ -65,7 +62,7 @@ def find_links(url):
 				discarded.append(link)
 				continue
 
-			found_rss_result = feedparser.parse(rss_url)
+			found_rss_result = feedparser.parse(rss_url, request_headers=HTTP_HEADERS)
 			if found_rss_result.bozo > 0:
 				discarded.append(link)
 				continue
@@ -149,7 +146,7 @@ def find_rss_url(original_url):
 	return rss_link
 
 def get_request(url):
-	return requests.get(url, headers=request_headers)
+	return requests.get(url, headers=HTTP_HEADERS)
 
 def find_anchors(entry):
 	soup = BeautifulSoup(entry.description, "html.parser")
