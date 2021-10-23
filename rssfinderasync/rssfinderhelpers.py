@@ -80,7 +80,7 @@ def find_anchors(entry):
 def is_valid_url(url):
     return url and url.startswith("http")
 
-def is_rss_content_type(content_type):
+def is_feed_content_type(content_type):
     if content_type.startswith("application/rss") \
     or content_type.startswith("application/atom") \
     or content_type.startswith("application/xml"):
