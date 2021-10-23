@@ -1,8 +1,10 @@
-import feedparser
-from bs4 import BeautifulSoup
-import requests
 from time import sleep
-import ssl
+
+import feedparser
+import requests
+from bs4 import BeautifulSoup
+
+from rssfinderasync.rssfinderhelpers import build_possible_rss_url
 
 # Autoreload imported scripts without restarting the repl:
 # https://ipython.org/ipython-doc/3/config/extensions/autoreload.html
@@ -112,8 +114,7 @@ def find_rss_url(original_url):
 	
 	if link_tag is None:
 		response = None
-		url_split = url.split('/')
-		possible_feed_url = url_split[0]+url_split[1]+'//'+url_split[2]+'/feed'
+		possible_feed_url = build_possible_rss_url(url)
 		try:
 			response = get_request(possible_feed_url)
 		except:
