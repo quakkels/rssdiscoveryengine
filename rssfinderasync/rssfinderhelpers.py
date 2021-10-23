@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 
 import feedparser
 import requests
+import html
 from bs4 import BeautifulSoup
 
 from rssdiscoveryengine_app.headers import HTTP_HEADERS
@@ -86,6 +87,16 @@ def is_feed_content_type(content_type):
     or content_type.startswith("application/xml"):
         return True
     return False
+
+# mutates feedparser object
+def unescape_feed(feed):
+    if "title" in feed:
+        feed["title"] = html.unescape(feed["title"])
+    if "title_detail" in feed:
+        title_detail = feed["title_detail"]
+        if "value" in title_detail:
+            title_detail["value"] = html.unescape(title_detail["value"])
+    return feed
 
 def find_unique_results(results):
     results = [x for x in results if x is not None]
