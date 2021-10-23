@@ -1,8 +1,10 @@
 # RSS Discovery Engine
 
-The RSS Discovery Engine exists to encourage people to use RSS for finding and consuming their news and current events.
+The [RSS Discovery Engine](https://rdengine.herokuapp.com/) exists to encourage people to use RSS for finding and consuming their news and current events.
 
 ![RSS Discovery Engine Screenshot](http://quakkels.com/images/rde_dark.png)
+
+Check it out here: [rdengine.herokuapp.com](https://rdengine.herokuapp.com/)
 
 ## Running RSS Discovery Engine locally
 
@@ -19,3 +21,6 @@ And then run the development server, which will make a development server access
 ```shell
 ./run.sh
 ```
+
+## Resources
+- [RSS is Wonderful](https://quakkels.com/posts/rss-is-wonderful/)
