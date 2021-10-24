@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Python testing
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install deps
+        run: pip install -r requirements_dev.txt
+      - name: Run tests
+        run: pytest -vvv
