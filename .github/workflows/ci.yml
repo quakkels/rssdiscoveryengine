@@ -1,0 +1,26 @@
+name: tests
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Python testing
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements_dev.txt') }}          
+      - name: Install deps
+        run: pip install -r requirements_dev.txt -e .
+      - name: Run tests
+        run: pytest -vvv
