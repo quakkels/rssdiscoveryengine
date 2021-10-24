@@ -24,3 +24,7 @@ And then run the development server, which will make a development server access
 
 ## Resources
 - [RSS is Wonderful](https://quakkels.com/posts/rss-is-wonderful/)
+
+## License
+
+RSS Discovery Engine is licensed under the [MIT](LICENSE) license.
