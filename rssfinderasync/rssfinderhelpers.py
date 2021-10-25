@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import feedparser
 import requests
@@ -45,13 +45,7 @@ def build_possible_rss_url(url):
 
 
 def add_protocol_urlprefix(blog_url, rss_url):
-    if rss_url.startswith('//'):
-        rss_url = blog_url.split('//')[0] + rss_url
-    elif rss_url.startswith('/'):
-        url_split = blog_url.split('/')
-        rss_url = url_split[0] + '//' + url_split[2] + rss_url
-
-    return rss_url
+    return urljoin(blog_url, rss_url)
 
 def get_urls_from_rss_feed(rss_url):
     feed = feedparser.parse(rss_url, request_headers=HTTP_HEADERS)
