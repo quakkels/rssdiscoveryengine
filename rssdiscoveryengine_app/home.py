@@ -6,7 +6,6 @@ from flask import (
 	flash
 	)
 from jinja2 import TemplateNotFound
-from . import rssfinder
 from rssfinderasync import rfasync
 
 bp = Blueprint('home', __name__,
