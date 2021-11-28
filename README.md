@@ -4,7 +4,7 @@ The [RSS Discovery Engine](https://rdengine.herokuapp.com/) exists to encourage 
 
 ![RSS Discovery Engine Screenshot](http://quakkels.com/images/rde_dark.png)
 
-Check it out here: [rdengine.herokuapp.com](https://rdengine.herokuapp.com/)
+Check it out here: [rdengine.quakkels.com](https://rdengine.quakkels.com/)
 
 ## Running RSS Discovery Engine locally
 
