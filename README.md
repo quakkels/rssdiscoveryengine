@@ -1,3 +1,8 @@
+> ## Planned JavaScript Port
+> RSS Discovery Engine is facing problems related to bots taking advantage of it and spaming websites with requests. The result is some sites are forced to block the server's IP address.
+
+>Since the engine keeps no cache nor persists any spidered data to disk, the engine would work on the client. So the plan is to port the engine from Python to client side JavaScript. Once it's running in the client, blocking a spammer means the spammer's own IP gets blocked. Therefore, the many legitimate users of RSS Discovery Engine would not be affected.
+
 # RSS Discovery Engine
 
 The [RSS Discovery Engine](https://rdengine.quakkels.com/) exists to encourage people to use RSS for finding and consuming their news and current events.
